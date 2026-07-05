@@ -1,0 +1,113 @@
+=================================================
+   DRESSIFY - NEW USER / SETUP GUIDE
+=================================================
+
+This guide is for anyone setting up and running this
+project on their system for the first time.
+
+-------------------------------------------------
+1. WHAT IS THIS PROJECT
+-------------------------------------------------
+Dressify is a web application built with:
+- Frontend: React
+- Backend: Node.js / Express
+- Database: Runs via a Docker container
+
+-------------------------------------------------
+2. REQUIREMENTS (Install these first)
+-------------------------------------------------
+- Node.js (v18 or above)          -> https://nodejs.org
+- npm (comes bundled with Node)
+- Docker Desktop                   -> https://www.docker.com/products/docker-desktop
+- Git                               -> https://git-scm.com
+
+Verify everything is installed:
+    node -v
+    npm -v
+    docker -v
+    git --version
+
+-------------------------------------------------
+3. CLONE THE PROJECT
+-------------------------------------------------
+    git clone https://github.com/khushii-012/Dressify-v2.git
+    cd Dressify-v2
+
+-------------------------------------------------
+4. START THE DATABASE (Docker)
+-------------------------------------------------
+If a docker-compose.yml file exists in the project:
+    docker-compose up -d
+
+If there's only a Dockerfile (for the database):
+    docker build -t dressify-db .
+    docker run -d -p 5432:5432 dressify-db
+
+(Note: The exact command depends on how the Docker
+setup is configured. Check the root folder for a
+docker-compose.yml file if unsure.)
+
+-------------------------------------------------
+5. BACKEND SETUP
+-------------------------------------------------
+    cd Backend
+    npm install
+
+Create a .env file (if not already present) with:
+    PORT=5000
+    DATABASE_URL=your_docker_db_connection_string
+    (Add any other required keys based on the project)
+
+Start the backend:
+    npm start
+    (or)
+    npm run dev
+
+-------------------------------------------------
+6. FRONTEND SETUP
+-------------------------------------------------
+In a new terminal:
+    cd frontend
+    npm install
+    npm start
+
+This should automatically open in your browser at:
+    http://localhost:3000
+
+-------------------------------------------------
+7. PROJECT STRUCTURE
+-------------------------------------------------
+Dressify-v2/
+│
+├── Backend/          -> Node.js/Express API code
+├── frontend/          -> React application
+├── render.yaml        -> Deployment config
+├── .gitignore
+└── file.txt           -> This guide
+
+(See structure.txt for the full detailed file tree)
+
+-------------------------------------------------
+8. COMMON ISSUES
+-------------------------------------------------
+- "Port already in use" error
+      -> Docker or another process is using that port.
+         Change the port in .env or stop that process.
+
+- "Module not found" error
+      -> Run npm install again in the affected folder
+         (Backend or frontend, wherever the error occurred)
+
+- Database not connecting
+      -> Check if the Docker container is running:
+             docker ps
+         If it's not listed, start it:
+             docker start <container_name>
+
+-------------------------------------------------
+9. NEED HELP?
+-------------------------------------------------
+Project owner: khushii-012
+Repo: https://github.com/khushii-012/Dressify-v2
+
+=================================================
